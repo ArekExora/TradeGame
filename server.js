@@ -24,7 +24,7 @@ if (isDevelopment) {
     app.use(webpackHotMiddleware(compiler));
 
     //Read the index file from memory and send it to the user (gives control to the client app).
-    app.get('/', function (request, response) {
+    app.get('/', function (request, response, next) {
         compiler.outputFileSystem.readFile(INDEX_FILE, function (error, result) {
             if (error) {
                 return next(error);
