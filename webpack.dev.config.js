@@ -1,7 +1,12 @@
 var webpack = require ('webpack');
 var baseConfig = require("./webpack.base.config.js");
 
-baseConfig.entry = ['webpack-hot-middleware/client', './app'];
+baseConfig.entry = [
+    'babel-polyfill',
+    'react-hot-loader/patch',
+    'webpack-hot-middleware/client',
+    './app'
+];
 
 baseConfig.output.publicPath = '/';
 
