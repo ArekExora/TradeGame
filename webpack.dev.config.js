@@ -2,7 +2,7 @@ var webpack = require ('webpack');
 var baseConfig = require("./webpack.base.config.js");
 
 baseConfig.entry = [
-    'babel-polyfill',
+    '@babel/polyfill',
     'react-hot-loader/patch',
     'webpack-hot-middleware/client',
     './app'

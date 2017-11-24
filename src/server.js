@@ -1,16 +1,16 @@
-var express = require ('express');
-var webpack = require ('webpack');
-var path = require ('path');
-var webpackDevMiddleware = require('webpack-dev-middleware');
-var webpackHotMiddleware = require('webpack-hot-middleware');
-var config = require('./webpack.dev.config.js');
+const express = require('express');
+const webpack = require('webpack');
+const path = require('path');
+const webpackDevMiddleware = require('webpack-dev-middleware');
+const webpackHotMiddleware = require('webpack-hot-middleware');
+const config = require('../webpack.dev.config.js');
 
-var DEFAULT_PORT = 5000;
-var DIST_DIR = path.join(__dirname, 'dist');
-var INDEX_FILE = path.join(DIST_DIR, 'index.html');
-var app = express();
-var isDevelopment = process.env.NODE_ENV !== 'production';
-var compiler = webpack(config);
+const DEFAULT_PORT = 5000;
+const DIST_DIR = path.join(__dirname, 'dist');
+const INDEX_FILE = path.join(DIST_DIR, 'index.html');
+const app = express();
+const isDevelopment = process.env.NODE_ENV !== 'production';
+const compiler = webpack(config);
 
 //Set the port to use.
 app.set('port', process.env.PORT || DEFAULT_PORT);

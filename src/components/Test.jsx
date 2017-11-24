@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const Test = ({ prop1, prop2 }) => {
     return (
@@ -9,9 +10,9 @@ const Test = ({ prop1, prop2 }) => {
     );
 };
 
-// Test.propTypes = {
-//     prop1: PropTypes.string.isRequired,
-//     prop2: PropTypes.string.isRequired
-// };
+Test.propTypes = {
+    prop1: PropTypes.string.isRequired,
+    prop2: PropTypes.string.isRequired
+};
 
 export default Test;

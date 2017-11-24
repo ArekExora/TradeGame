@@ -1,9 +1,7 @@
-// var React = require('react');
-
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { AppContainer } from 'react-hot-loader'
-import Test from './components/Test'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { AppContainer } from 'react-hot-loader';
+import Test from './components/Test';
 
 require('file-loader?name=index.html!./index.html');
 
@@ -21,4 +19,4 @@ render(Test);
 // Webpack Hot Module Replacement API
 if (module.hot) {
     module.hot.accept('./components/Test', () => { render(Test) })
-};
+}
