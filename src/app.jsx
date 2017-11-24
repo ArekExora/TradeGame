@@ -8,15 +8,15 @@ require('file-loader?name=index.html!./index.html');
 const render = Component => {
     ReactDOM.render(
         <AppContainer>
-            <Component prop1={"HOLA"} prop2={"MUNDO"} />
+            <Component prop1={'HOLA'} prop2={'MUNDO'} />
         </AppContainer>,
         document.getElementById('container'),
-    )
+    );
 };
 
 render(Test);
 
 // Webpack Hot Module Replacement API
 if (module.hot) {
-    module.hot.accept('./components/Test', () => { render(Test) })
+    module.hot.accept('./components/Test', () => { render(Test); });
 }
