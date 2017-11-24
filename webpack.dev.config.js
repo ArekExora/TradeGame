@@ -5,7 +5,7 @@ baseConfig.entry = [
     '@babel/polyfill',
     'react-hot-loader/patch',
     'webpack-hot-middleware/client',
-    './app'
+    './index'
 ];
 
 baseConfig.output.publicPath = '/';
