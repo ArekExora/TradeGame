@@ -1,9 +1,13 @@
+'use strict';
+
 import express from 'express';
 import webpack from 'webpack';
 import path from 'path';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import config from '../webpack.dev.config.js';
+
+import apiRouter from './serverAPI/serverAPI';
 
 const DEFAULT_PORT = 5000;
 const DIST_DIR = path.join(__dirname, 'dist');
@@ -43,6 +47,8 @@ if (isDevelopment) {
         response.sendFile(INDEX_FILE);
     });
 }
+
+app.use('/API', apiRouter);
 
 //Start listening.
 app.listen(app.get('port'), function(error) {

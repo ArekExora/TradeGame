@@ -1,6 +1,10 @@
+'use strict';
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+
+import apiService from './../services/apiService';
 
 import MainContainer from './mainContainer';
 
@@ -16,11 +20,19 @@ export class App extends React.Component {
     increaseFunction() {
         console.log('this is just a test 1');
         this.props.dispatch({ type: 'increase' });
+
+        apiService.get('12')
+            .then(data => console.log(data))
+            .catch(error => console.log(error));
     }
 
     decreaseFunction() {
         console.log('this is just a test 2');
         this.props.dispatch({ type: 'decrease' });
+
+        apiService.get('')
+            .then(data => console.log(data.message))
+            .catch(error => console.log(error));
     }
 
     render() {
