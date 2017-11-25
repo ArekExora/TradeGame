@@ -3,6 +3,8 @@
 import express from 'express';
 import webpack from 'webpack';
 import path from 'path';
+import http from 'http';
+import sockets from 'socket.io';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import config from '../webpack.dev.config.js';
@@ -13,6 +15,8 @@ const DEFAULT_PORT = 5000;
 const DIST_DIR = path.join(__dirname, 'dist');
 const INDEX_FILE = path.join(DIST_DIR, 'index.html');
 const app = express();
+const server = http.createServer(app);
+const io = sockets(server);
 const isDevelopment = process.env.NODE_ENV !== 'production';
 const compiler = webpack(config);
 
@@ -28,8 +32,8 @@ if (isDevelopment) {
     app.use(webpackHotMiddleware(compiler));
 
     //Read the index file from memory and send it to the user (gives control to the client app).
-    app.get('/', function(request, response, next) {
-        compiler.outputFileSystem.readFile(INDEX_FILE, function(error, result) {
+    app.get('/', (request, response, next) => {
+        compiler.outputFileSystem.readFile(INDEX_FILE, (error, result) => {
             if (error) {
                 return next(error);
             }
@@ -43,14 +47,36 @@ if (isDevelopment) {
     app.use(express.static(DIST_DIR));
 
     //Send the index file to the user (gives control to the client app).
-    app.get('/', function(request, response) {
+    app.get('/', (request, response) => {
         response.sendFile(INDEX_FILE);
     });
 }
 
 app.use('/API', apiRouter);
 
+let count = 0;
+io.on('connection', (socket) => {
+    count++;
+
+    io.emit('news', { msg: 'One more person is online', count: count });
+    socket.emit('private', { msg: 'Welcome you are the ' + count + ' person here' });
+
+    socket.on('private', (data) => {
+        console.log('In private', data);
+    });
+
+    socket.on('chat', (msg) => {
+        console.log('chat: ', msg);
+        io.emit('chat', msg);
+    });
+
+    socket.on('disconnect', () => {
+        count--;
+        io.emit('news', { msg: 'Someone went home', count: count });
+    });
+});
+
 //Start listening.
-app.listen(app.get('port'), function(error) {
+server.listen(app.get('port'), (error) => {
     console.log('Running ' + (isDevelopment ? 'DEVELOPMENT' : 'PRODUCTION') + ' server on port ' + app.get('port'));
 });

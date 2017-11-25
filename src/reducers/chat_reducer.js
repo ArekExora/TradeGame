@@ -1,14 +1,13 @@
 'use strict';
 
-const initialState = 0;
+const initialState = [
+    {from:'Admin', text:'Welcome'}
+];
 
 export default function(state = initialState, action) {
     switch (action.type) {
-        case 'increase':
-            return state + 1;
-
-        case 'decrease':
-            return state - 1;
+        case 'receivedMessage':
+            return [...state, action.msg];
 
         default:
             return state;
