@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 
 import apiService from './../services/apiService';
 import socket from './../services/socket';
+import user from './../services/personalisationService';
 
 import MainContainer from './mainContainer';
 import Chat from './chat';
@@ -17,6 +18,9 @@ export class App extends React.Component {
 
         this.increaseFunction = this.increaseFunction.bind(this);
         this.decreaseFunction = this.decreaseFunction.bind(this);
+
+        user.userId = Math.floor(Math.random() * 100);
+        user.userName = 'User' + user.userId;
 
         socket.on('news', function (data) {
             console.log('En news', data);
@@ -52,7 +56,7 @@ export class App extends React.Component {
             <div>
                 <MainContainer increaseFn={this.increaseFunction} decreaseFn={this.decreaseFunction}/>
                 <div>Counter: {this.props.counter}</div>
-                <Chat name={'user' + Math.floor(Math.random() * 100)}/>
+                <Chat />
             </div>
         );
     }

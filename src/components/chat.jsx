@@ -11,27 +11,27 @@ class Chat extends React.Component {
         super(props, context);
 
         socket.on('chat', (msg) => {
-            console.log('New message', msg);
-            this.props.dispatch({ type: 'receivedMessage', msg });
+            this.props.dispatch({ type: 'receiveMessage', msg });
         });
+
+        this.sendMessage = this.sendMessage.bind(this);
     }
 
+    sendMessage () {
+        const text = document.getElementById('msg').value;
+        document.getElementById('msg').value = '';
+
+        this.props.dispatch({ type: 'sendMessage', text });
+    };
+
     render () {
-        const sendMessage = () => {
-            const text = document.getElementById('msg').value;
-            document.getElementById('msg').value = '';
-
-            console.log('Enviamos un chat: ' + text);
-            socket.emit('chat', {from: this.props.name, text});
-        };
-
         return (
             <div>
                 <input id='msg' type='text'/>
-                <button onClick={sendMessage}>Send</button>
+                <button onClick={this.sendMessage}>Send</button>
                 <ul>
                     {this.props.messageList.map((msg, index) => {
-                        return <li key={ index }>{msg.from}: {msg.text}</li>;
+                        return <li key={ index }>{msg.userName}: {msg.text} {msg.sameUp ? 'U' : ''}{msg.sameDown ? 'D' : ''}   {msg.isPending ? 'P' : ''}</li>;
                     })}
                 </ul>
 
@@ -41,7 +41,6 @@ class Chat extends React.Component {
 }
 
 Chat.propTypes = {
-    name: PropTypes.string.isRequired,
     messageList: PropTypes.array.isRequired
 };
 
