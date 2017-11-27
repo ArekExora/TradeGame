@@ -3,32 +3,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const injectStyle = (style) => {
-    console.log('ENTRA');
-    const styleElement = document.createElement('style');
-    let styleSheet = null;
-
-    document.head.appendChild(styleElement);
-
-    styleSheet = styleElement.sheet;
-
-    styleSheet.insertRule(style, styleSheet.cssRules.length);
-};
-
-const keyframesStyle = `
-    @-webkit-keyframes rotate {
-        0%   { transform: rotate(360deg);   }
-        50%  { transform: rotate(180deg); }
-        100% { transform: rotate(0deg); }
-    }
-`;
-injectStyle(keyframesStyle);
-
 const generateStyle = ({ sameUp, sameDown, isPending }) => {
     const borderStyle = '1px solid green';
 
     const container = {
         backgroundColor: 'lightgreen',
+        backgroundImage: isPending ? 'url("icons/loading.gif")' : '',
+        backgroundPosition: 'right',
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: '15px',
         borderBottom: sameDown ? 'none' : borderStyle,
         borderLeft: borderStyle,
         borderRight: borderStyle,
@@ -56,16 +39,7 @@ const generateStyle = ({ sameUp, sameDown, isPending }) => {
         transition: 'color 1s'
     };
 
-    const loadingIcon = {
-        display: isPending ? '' : 'none',
-        height: '16px',
-        float: 'right',
-        transition: 'display 1s',
-        WebkitAnimation: 'rotate 2s linear infinite',
-        width: '16px'
-    };
-
-    return { container, author, text, loadingIcon };
+    return { container, author, text };
 };
 
 const MessageItem = ({ message }) => {
@@ -79,7 +53,6 @@ const MessageItem = ({ message }) => {
             <span style={style.text}>
                 {message.text}
             </span>
-            <img style={style.loadingIcon} src='icons/loading.svg' alt='Loading'/>
         </div>
     );
 };

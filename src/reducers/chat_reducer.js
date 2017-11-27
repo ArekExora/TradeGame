@@ -6,7 +6,7 @@ import user from './../services/personalisationService';
 const generateMsg = ({userName, userId}, text) => ({ userName, userId, text });
 
 const initialState = [
-    generateMsg({userName:'Admin', userId: -1}, 'Welcome')
+    generateMsg({userName:'Admin', userId: 0}, 'Welcome')
 ];
 
 let messageCount = 1;
