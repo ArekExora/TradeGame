@@ -3,11 +3,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const generateStyle = ({ sameUp, sameDown, isPending }) => {
-    const borderStyle = '1px solid green';
+import user from './../../services/personalisationService';
+
+const calculateMessageColors = (senderId) => {
+    const ADMIN_ID = 0;
+    const userColors = {
+        admin: { background: '#ec5858d4', border: '#8e3c3cd4' },
+        self: { background: 'lightblue', border: 'blue' },
+        other: { background: 'lightgreen', border: 'green' }
+    };
+
+    if (senderId === ADMIN_ID){
+        return userColors.admin;
+    } else if (senderId === user.userId) {
+        return userColors.self;
+    } else {
+        return userColors.other;
+    }
+};
+
+const generateStyle = ({ userId, sameUp, sameDown, isPending }) => {
+    const messageColors = calculateMessageColors(userId);
+    const borderStyle = '2px solid ' + messageColors.border;
 
     const container = {
-        backgroundColor: 'lightgreen',
+        backgroundColor: messageColors.background,
         backgroundImage: isPending ? 'url("icons/loading.gif")' : '',
         backgroundPosition: 'right',
         backgroundRepeat: 'no-repeat',

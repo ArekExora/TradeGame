@@ -26,9 +26,17 @@ class Chat extends React.Component {
     };
 
     render () {
+        const detectEnter = (event) => {
+            const ENTER_CODE = 13;
+
+            if (event.charCode === ENTER_CODE) {
+                this.sendMessage();
+            }
+        };
+
         return (
             <div>
-                <input id='msg' type='text'/>
+                <input id='msg' type='text' onKeyPress={detectEnter}/>
                 <button onClick={this.sendMessage}>Send</button>
                 <MessageContainer messageList={this.props.messageList}/>
 
