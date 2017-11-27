@@ -53,6 +53,7 @@ if (isDevelopment) {
 }
 
 app.use('/API', apiRouter);
+app.use(express.static('static'));
 
 let count = 0;
 io.on('connection', (socket) => {

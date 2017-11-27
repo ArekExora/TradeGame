@@ -19,14 +19,14 @@ export default function(state = initialState, action) {
             //Generate the message and send it to the server.
             newMessage = generateMsg(user, action.text);
             newMessage.order = messageCount++;
-            // setTimeout(() => {
-            //     const delayedMessage = generateMsg({userName: newMessage.userName, userId: newMessage.userId}, newMessage.text);
-            //     delayedMessage.order = newMessage.order;
-            //     console.log('Enviamos un chat: ', delayedMessage);
-            //     socket.emit('chat', delayedMessage);
-            // }, 2000);
-            console.log('Enviamos un chat: ', newMessage);
-            socket.emit('chat', newMessage);
+            setTimeout(() => {
+                const delayedMessage = generateMsg({userName: newMessage.userName, userId: newMessage.userId}, newMessage.text);
+                delayedMessage.order = newMessage.order;
+                console.log('Enviamos un chat: ', delayedMessage);
+                socket.emit('chat', delayedMessage);
+            }, 2000);
+            // console.log('Enviamos un chat: ', newMessage);
+            // socket.emit('chat', newMessage);
 
             //Check if the sender is the same as the previous one and flag it.
             if (state.length > 0 && state[state.length-1].userId === newMessage.userId){

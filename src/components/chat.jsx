@@ -4,6 +4,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+import MessageContainer from './chatComponents/messageContainer';
 import socket from './../services/socket';
 
 class Chat extends React.Component {
@@ -29,11 +30,7 @@ class Chat extends React.Component {
             <div>
                 <input id='msg' type='text'/>
                 <button onClick={this.sendMessage}>Send</button>
-                <ul>
-                    {this.props.messageList.map((msg, index) => {
-                        return <li key={ index }>{msg.userName}: {msg.text} {msg.sameUp ? 'U' : ''}{msg.sameDown ? 'D' : ''}   {msg.isPending ? 'P' : ''}</li>;
-                    })}
-                </ul>
+                <MessageContainer messageList={this.props.messageList}/>
 
             </div>
         );
