@@ -6,10 +6,15 @@ import user from './../services/personalisationService';
 const generateMsg = ({userName, userId}, text) => ({ userName, userId, text });
 
 const initialState = [
-    generateMsg({userName:'Admin', userId: 0}, 'Welcome')
+    generateMsg({userName:'Admin', userId: 0}, 'Welcome'),
+    generateMsg({userName:'User1', userId: 1}, 'This is a'),
+    generateMsg({userName:'User1', userId: 1}, 'multiline'),
+    generateMsg({userName:'User1', userId: 1}, 'test'),
+    generateMsg({userName:'User2', userId: 2}, 'This is a single line test')
 ];
+initialState[1].sameDown = initialState[2].sameUp = initialState[2].sameDown = initialState[3].sameUp = true
 
-let messageCount = 1;
+    let messageCount = 1;
 
 export default function(state = initialState, action) {
     console.log(action);
