@@ -35,9 +35,9 @@ class Chat extends React.Component {
         };
 
         return (
-            <div>
-                <input id='msg' type='text' onKeyPress={detectEnter}/>
-                <button onClick={this.sendMessage}>Send</button>
+            <div className='chat__container'>
+                <input className='chat__input' id='msg' type='text' onKeyPress={detectEnter}/>
+                <button className='chat__button' onClick={this.sendMessage}>Send</button>
                 <MessageContainer messageList={this.props.messageList}/>
 
             </div>

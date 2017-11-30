@@ -11,7 +11,7 @@ const style = {
 };
 
 const MessageContainer = ({ messageList }) => (
-    <div className='chatContainer' style={style}>
+    <div className='chat__message-board' style={style}>
         {messageList.map((message, index) => {
             return <MessageItem key={ index } message={message} index={index}/>;
         })}

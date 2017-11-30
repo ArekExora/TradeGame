@@ -62,11 +62,41 @@ const generateStyle = ({ userId, sameUp, sameDown, isPending }) => {
     return { container, author, text };
 };
 
+const generateClasses = ({ userId, sameUp, sameDown, isPending }) => {
+    const ADMIN_ID = 0;
+    let generatedClasses = '';
+    //Bubble options.
+    if (sameUp && sameDown) {
+        generatedClasses += 'chat__message--middle ';
+    } else if (sameUp) {
+        generatedClasses += 'chat__message--bottom ';
+    } else if (sameDown) {
+        generatedClasses += 'chat__message--top ';
+    } else {
+        generatedClasses += 'chat__message--single '; //Possibly this is not needed.
+    }
+
+    //Pending status.
+    generatedClasses += isPending ? 'chat__message--pending ' : '';
+
+    //Author.
+    if (userId === ADMIN_ID){
+        generatedClasses += 'chat__message--admin ';
+    } else if (userId === user.userId) {
+        generatedClasses += 'chat__message--self ';
+    } else {
+        generatedClasses += 'chat__message--other ';
+    }
+
+    return generatedClasses;
+};
+
 const MessageItem = ({ message }) => {
     const style = generateStyle(message);
+    const className = 'chat__message ' + generateClasses(message)
 
     return (
-        <div className='chatMessage' style={style.container}>
+        <div className={className} style={style.container}>
             <span style={style.author}>
                 {message.userName}
             </span>
