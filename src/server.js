@@ -11,7 +11,7 @@ import config from '../webpack.dev.config.js';
 
 import apiRouter from './serverAPI/serverAPI';
 
-const DEFAULT_PORT = 5000;
+const DEFAULT_PORT = 5500;
 const DIST_DIR = path.join(__dirname, 'dist');
 const INDEX_FILE = path.join(DIST_DIR, 'index.html');
 const app = express();
