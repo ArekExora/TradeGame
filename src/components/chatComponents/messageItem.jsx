@@ -96,11 +96,11 @@ const MessageItem = ({ message }) => {
     const className = 'chat__message ' + generateClasses(message)
 
     return (
-        <div className={className} style={style.container}>
-            <span style={style.author}>
+        <div className={className}>
+            <span className='user'>
                 {message.userName}
             </span>
-            <span style={style.text}>
+            <span className='text'>
                 {message.text}
             </span>
         </div>
