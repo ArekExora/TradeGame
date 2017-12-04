@@ -97,6 +97,8 @@ const generateClasses = (basicClass, { userId, sameUp, sameDown, isPending }) =>
 const MessageItem = ({ message }) => {
     return (
         <div className={generateClasses('chat__message', message)}>
+            <div className={generateClasses('chat__avatar', message)}></div>
+            <div className={generateClasses('chat__message-arrow', message)}></div>
             <div className={generateClasses('chat__text-container', message)}>
                 <div className={generateClasses('chat__sender', message)}>
                     {message.userName}
@@ -105,8 +107,6 @@ const MessageItem = ({ message }) => {
                     {message.text}
                 </div>
             </div>
-            <div className={generateClasses('chat__message-arrow', message)}></div>
-            <div className={generateClasses('chat__avatar', message)}></div>
         </div>
     );
 };
