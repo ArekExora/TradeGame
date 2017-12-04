@@ -83,6 +83,7 @@ body {
 .chat__message--self {
     float: right;
     flex-direction: row-reverse;
+    text-align: right;
 }
 .chat__message--top, .chat__message--middle {
     padding-bottom: 0;
@@ -92,7 +93,7 @@ body {
 }
 
 .chat__text-container {
-    background: #ddd;
+    background-color: #ddd;
     color: #444;
     width: calc(100% - 115px);
     padding: 18px;
@@ -107,6 +108,12 @@ body {
     padding-top: 5px;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
+}
+.chat__text-container--pending {
+    background-image: url('/icons/loading.gif');
+    background-repeat: no-repeat;
+    background-position: 5px;
+    background-size: 15px;
 }
 
 .chat__message-arrow {
