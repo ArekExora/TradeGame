@@ -12,7 +12,9 @@ Current roadmap:
 * Have some fun playing...
 
 Before working on it please create your own branch, and when commiting changes please follow the documentation from https://www.npmjs.com/package/generate-changelog
+
     type(category): description
+    
 Where type is one of the following:
 * build
 * ci
@@ -26,6 +28,7 @@ Where type is one of the following:
 * revert
 * style
 * test
+
 And category is whatever you are working on.
 
 Thanks for your collaboration!
