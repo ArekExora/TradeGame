@@ -62,47 +62,51 @@ const generateStyle = ({ userId, sameUp, sameDown, isPending }) => {
     return { container, author, text };
 };
 
-const generateClasses = ({ userId, sameUp, sameDown, isPending }) => {
+const generateClasses = (basicClass, { userId, sameUp, sameDown, isPending }) => {
     const ADMIN_ID = 0;
-    let generatedClasses = '';
+    const generatedClasses = [basicClass];
+
     //Bubble options.
     if (sameUp && sameDown) {
-        generatedClasses += 'chat__message--middle ';
+        generatedClasses.push(basicClass + '--middle');
     } else if (sameUp) {
-        generatedClasses += 'chat__message--bottom ';
+        generatedClasses.push(basicClass + '--bottom');
     } else if (sameDown) {
-        generatedClasses += 'chat__message--top ';
+        generatedClasses.push(basicClass + '--top');
     } else {
-        generatedClasses += 'chat__message--single '; //Possibly this is not needed.
+        generatedClasses.push(basicClass + '--single');
     }
 
     //Pending status.
-    generatedClasses += isPending ? 'chat__message--pending ' : '';
+    if (isPending) {
+        generatedClasses.push(basicClass + '--pending');
+    }
 
     //Author.
     if (userId === ADMIN_ID){
-        generatedClasses += 'chat__message--admin ';
+        generatedClasses.push(basicClass + '--admin');
     } else if (userId === user.userId) {
-        generatedClasses += 'chat__message--self ';
+        generatedClasses.push(basicClass + '--self');
     } else {
-        generatedClasses += 'chat__message--other ';
+        generatedClasses.push(basicClass + '--other');
     }
 
-    return generatedClasses;
+    return generatedClasses.join(' ');
 };
 
 const MessageItem = ({ message }) => {
-    const style = generateStyle(message);
-    const className = 'chat__message ' + generateClasses(message)
-
     return (
-        <div className={className}>
-            <span className='user'>
-                {message.userName}
-            </span>
-            <span className='text'>
-                {message.text}
-            </span>
+        <div className={generateClasses('chat__message', message)}>
+            <div className={generateClasses('chat__text-container', message)}>
+                <div className={generateClasses('chat__sender', message)}>
+                    {message.userName}
+                </div>
+                <div className={generateClasses('chat__text', message)}>
+                    {message.text}
+                </div>
+            </div>
+            <div className={generateClasses('chat__message-arrow', message)}></div>
+            <div className={generateClasses('chat__avatar', message)}></div>
         </div>
     );
 };

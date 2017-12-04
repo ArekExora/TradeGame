@@ -55,7 +55,6 @@ body {
     background: #444;
     border-radius: 5px;
     overflow: hidden;
-    position: relative;
 }
 
 .chat__header {
@@ -68,96 +67,100 @@ body {
 }
 
 .chat__message-board {
-    height: calc(100% - 110px);
+    height: calc(100% - 70px);
     overflow-y: auto;
-    padding: 20px;
+    padding: 0 15px;
+    width: calc(100% - 30px);
 }
 
 .chat__message {
-    background: #ddd;
-    color: #444;
-    width: 70%;
-    padding: 20px;
-    float: left;
+    width: calc(100% - 30px);
+    display: flex;
+    padding: 10px 0;
     clear: both;
-    margin: 10px 0;
+    float: right;
     position: relative;
-    border-radius: 2px;
+}
+.chat__message--other {
+    flex-direction: row-reverse;
+    float: left;
+}
+.chat__message--top, .chat__message--middle {
+    padding-bottom: 0;
+}
+.chat__message--bottom, .chat__message--middle {
+    padding-top: 0;
 }
 
-.chat__message::before{
-    content:'';
+.chat__text-container {
+    background: #ddd;
+    color: #444;
+    width: calc(100% - 115px);
+    padding: 18px;
+    border-radius: 2px;
+}
+.chat__text-container--top, .chat__text-container--middle {
+    padding-bottom: 5px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.chat__text-container--bottom, .chat__text-container--middle {
+    padding-top: 5px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.chat__message-arrow {
     width: 0;
     height: 0;
     border-style: solid;
-    border-width: 20px 0 0 12px;
+    border-width: 6px 0 6px 12px;
     border-color: transparent transparent transparent #ddd;
-    position: absolute;
-    right:-12px;
-    top: 25px;
+    margin-top: 20px;
+}
+.chat__message-arrow--other {
+    border-width: 6px 12px 6px 0;
+    border-color: transparent #ddd transparent transparent;
+}
+.chat__message-arrow--middle, .chat__message-arrow--bottom {
+    display: none;
 }
 
-.chat__message::after {
-    content: '';
-    width: 60px;
-    height: 60px;
+.chat__avatar {
+    width: 56px;
+    height: 56px;
     border-radius: 5px;
     border: 2px solid #ddd;
     position: absolute;
-    right: -97px;
-    top: 0px;
+    right: 0px;
     background: #222 url(https://pbs.twimg.com/profile_images/604172322744963073/Q6xDLL_D.png);
     background-size: cover;
     overflow: hidden;
 }
-
-.chat__message--other {
-    float: right;
-}
-
-.chat__message--other::before{
-    content:'';
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 0 0 20px 12px;
-    border-color: transparent transparent #ddd transparent;
-    position: absolute;
-    left:-12px;
-    top: 25px;
-}
-
-
-.chat__message--other::after {
-    content: '';
-    width: 60px;
-    height: 60px;
-    border-radius: 5px;
-    border: 2px solid #ddd;
-    position: absolute;
-    left: -97px;
-    top: 0px;
+.chat__avatar--other {
+    left: 0px;
     background: #222 url(https://78.media.tumblr.com/avatar_478e09392730_128.png);
     background-size: cover;
-    overflow: hidden;
+}
+.chat__avatar--middle, .chat__avatar--bottom {
+    display: none;
 }
 
-.chat__message .user {
-    display: block;
+.chat__sender {
     text-transform: uppercase;
     color: #8e2002;
     font-size: 10px;
     margin-bottom: 2px;
 }
+.chat__sender--middle, .chat__sender--bottom {
+    display: none;
+}
 
-.chat__message .text {
-    display: block;
+.chat__text {
     font-size: 12px;
 }
 
 .chat__footer {
-    position: absolute;
-    bottom: 0;
     height: 40px;
     background: #333;
     width: 100%;
@@ -179,5 +182,5 @@ body {
     margin: 5px 0;
     padding: 0 30px;
     width: 115px;
+    cursor: pointer;
 }
-

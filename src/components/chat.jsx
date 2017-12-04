@@ -22,7 +22,9 @@ class Chat extends React.Component {
         const text = document.getElementById('msg').value;
         document.getElementById('msg').value = '';
 
-        this.props.dispatch({ type: 'sendMessage', text });
+        if(text.trim() !== '') {
+            this.props.dispatch({ type: 'sendMessage', text });
+        }
     };
 
     render () {
