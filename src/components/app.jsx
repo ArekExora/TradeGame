@@ -21,6 +21,7 @@ export class App extends React.Component {
 
         user.userId = Math.floor(Math.random() * 100);
         user.userName = 'User' + user.userId;
+        user.userAvatar = 'https://upload.wikimedia.org/wikipedia/commons/d/de/Mao_Zedong_1963_%28cropped%29.jpg'
 
         socket.on('news', function (data) {
             console.log('En news', data);

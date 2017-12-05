@@ -2,7 +2,8 @@
 
 const allowedProperties = [
   'userName',
-  'userId'
+  'userId',
+  'userAvatar'
 ];
 
 const proxyHandler = {

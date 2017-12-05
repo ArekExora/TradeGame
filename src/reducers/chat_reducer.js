@@ -3,16 +3,16 @@
 import socket from './../services/socket';
 import user from './../services/personalisationService';
 
-const generateMsg = ({userName, userId}, text) => ({ userName, userId, text });
+const generateMsg = ({userName, userId, userAvatar}, text) => ({ userName, userId, userAvatar, text });
 
 const initialState = [
-    generateMsg({userName:'Admin', userId: 0}, 'Welcome'),
-    generateMsg({userName:'User1', userId: 1}, 'This is a'),
-    generateMsg({userName:'User1', userId: 1}, 'multiline'),
-    generateMsg({userName:'User1', userId: 1}, 'test'),
-    generateMsg({userName:'User2', userId: 2}, 'This is a single line test')
+    generateMsg({userName:'Admin', userId: 0, userAvatar:'https://pbs.twimg.com/profile_images/604172322744963073/Q6xDLL_D.png'}, 'GO! START THE REVOLUTION!'),
+    generateMsg({userName:'User1', userId: 1, userAvatar:'https://78.media.tumblr.com/avatar_478e09392730_128.png'}, 'The solution to our problems is easy'),
+    generateMsg({userName:'User1', userId: 1, userAvatar:'https://78.media.tumblr.com/avatar_478e09392730_128.png'}, 'we should just'),
+    generateMsg({userName:'User1', userId: 1, userAvatar:'https://78.media.tumblr.com/avatar_478e09392730_128.png'}, 'socialize the means of production'),
+    generateMsg({userName:'User2', userId: 2, userAvatar:'https://www.biografiasyvidas.com/biografia/s/fotos/stalin.jpg'}, 'That should work')
 ];
-initialState[1].sameDown = initialState[2].sameUp = initialState[2].sameDown = initialState[3].sameUp = true
+initialState[1].sameDown = initialState[2].sameUp = initialState[2].sameDown = initialState[3].sameUp = true;
 
     let messageCount = 1;
 
@@ -25,7 +25,7 @@ export default function(state = initialState, action) {
             newMessage = generateMsg(user, action.text);
             newMessage.order = messageCount++;
             setTimeout(() => {
-                const delayedMessage = generateMsg({userName: newMessage.userName, userId: newMessage.userId}, newMessage.text);
+                const delayedMessage = generateMsg(user, newMessage.text);
                 delayedMessage.order = newMessage.order;
                 console.log('Enviamos un chat: ', delayedMessage);
                 socket.emit('chat', delayedMessage);
