@@ -9,7 +9,7 @@ import socket from './../services/socket';
 import user from './../services/personalisationService';
 
 import MainContainer from './mainContainer';
-import Chat from './chat';
+import Chat from './chat/chat';
 
 export class App extends React.Component {
 

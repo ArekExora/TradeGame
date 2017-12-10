@@ -4,8 +4,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import MessageContainer from './chatComponents/messageContainer';
-import socket from './../services/socket';
+import MessageContainer from './elements/messageContainer';
+import socket from '../../services/socket';
+
+import './style/chatStyle.scss'
 
 class Chat extends React.Component {
     constructor(props, context) {

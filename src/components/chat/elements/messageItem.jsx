@@ -3,7 +3,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import user from './../../services/personalisationService';
+import user from '../../../services/personalisationService';
 
 const generateClasses = (basicClass, { userId, sameUp, sameDown, isPending }) => {
     const ADMIN_ID = 0;

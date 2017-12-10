@@ -11,6 +11,7 @@ baseConfig.entry = [
 baseConfig.output.publicPath = '/';
 
 baseConfig.plugins = [
+    ...baseConfig.plugins,
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin()
