@@ -3,7 +3,7 @@
 const apiCall = (url, method, dataToSend) => {
     const promise = new Promise(function(resolve, reject) {
         const httpRequest = new XMLHttpRequest();
-        httpRequest.open(method, 'http://localhost:5000/API/' + url, true);
+        httpRequest.open(method, 'http://localhost:5500/API/' + url, true);
         httpRequest.onreadystatechange = function (e) {
             if (httpRequest.readyState == 4) {
                 if(httpRequest.status == 200)

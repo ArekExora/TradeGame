@@ -4,8 +4,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import MessageContainer from './chatComponents/messageContainer';
-import socket from './../services/socket';
+import MessageContainer from './elements/messageContainer';
+import socket from '../../services/socket';
+
+import './style/chatStyle.scss'
 
 class Chat extends React.Component {
     constructor(props, context) {
@@ -16,30 +18,38 @@ class Chat extends React.Component {
         });
 
         this.sendMessage = this.sendMessage.bind(this);
+        this.detectEnter = this.detectEnter.bind(this);
     }
+
+    detectEnter (event) {
+        if (event.key === 'Enter') {
+            this.sendMessage();
+        }
+    };
 
     sendMessage () {
         const text = document.getElementById('msg').value;
         document.getElementById('msg').value = '';
 
-        this.props.dispatch({ type: 'sendMessage', text });
+        if(text.trim() !== '') {
+            this.props.dispatch({ type: 'sendMessage', text });
+        }
     };
 
+    componentDidUpdate(prevProps) {
+        if(prevProps.messageList.length === this.props.messageList.length) {
+            return;
+        }
+        this.messageBoard.scrollTop = this.messageBoard.scrollHeight - this.messageBoard.clientHeight;
+    }
+
     render () {
-        const detectEnter = (event) => {
-            const ENTER_CODE = 13;
-
-            if (event.charCode === ENTER_CODE) {
-                this.sendMessage();
-            }
-        };
-
         return (
-            <div className='chat__container'>
+            <div ref={(chatElement) => { this.messageBoard = chatElement && chatElement.getElementsByClassName('chat__message-board')[0]; }} className='chat__container'>
                 <div className='chat__header'>Trade Game Chat</div>
                 <MessageContainer messageList={this.props.messageList}/>
                 <div className='chat__footer'>
-                    <input className='chat__input' id='msg' type='text' onKeyPress={detectEnter}/>
+                    <input className='chat__input' id='msg' type='text' placeholder='Type here...' onKeyPress={this.detectEnter}/>
                     <button className='chat__button' onClick={this.sendMessage}>Send</button>
                 </div>
             </div>
